@@ -1,9 +1,9 @@
 /**
- * Represents a node in a binary tree.
- * Each node stores an element and references to its left and right child nodes.
+ * Represents a node in a binary tree. Each node stores an element and
+ * references to its left and right child nodes.
  * 
  * @author raickmiranda
- * @summary Represents a node in a binary tree
+ * @summary Represents a node in a binary tree.
  * @version 1.0
  */
 
@@ -12,7 +12,7 @@ public class Node {
     protected Node left, right;
 
     /**
-     * Stores an element and references to the left and right child nodes
+     * Stores an element and references to the left and right child nodes.
      * 
      * @param element to be stored
      */
@@ -21,7 +21,7 @@ public class Node {
     }
 
     /**
-     * Stores an element and references to the left and right child nodes
+     * Stores an element and references to the left and right child nodes.
      * 
      * @param element to be stored
      * @param left    child node reference
