@@ -8,6 +8,7 @@
  */
 
 public class Node {
+    
     protected int element;
     protected Node left, right;
 
@@ -32,4 +33,5 @@ public class Node {
         this.left = left;
         this.right = right;
     }
+
 }

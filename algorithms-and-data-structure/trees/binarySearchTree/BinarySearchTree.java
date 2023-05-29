@@ -10,6 +10,7 @@
  */
 
 public class BinarySearchTree {
+
     private Node root;
 
     /**
@@ -294,4 +295,5 @@ public class BinarySearchTree {
             System.out.println(currentNode.element + " ");
         }
     }
+
 }
