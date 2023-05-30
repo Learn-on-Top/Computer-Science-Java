@@ -1,3 +1,5 @@
+package trees.redBlackTree;
+
 /**
  * The class represents a node in a Red-Black tree, which is a self-balancing
  * binary search tree. Each node stores an element and maintains references to
@@ -9,16 +11,16 @@
  * @version 1.0
  */
 
-public class Node {
+public class NodeRB {
 
     protected boolean color;
     protected int element;
-    protected Node left, right;
+    protected NodeRB left, right;
 
     /**
      * Creates a new node with no element assigned.
      */
-    Node() {
+    NodeRB() {
         this(-1);
     }
 
@@ -27,7 +29,7 @@ public class Node {
      * 
      * @param element to be stored
      */
-    Node(int element) {
+    NodeRB(int element) {
         this(element, false, null, null);
     }
 
@@ -37,7 +39,7 @@ public class Node {
      * @param element to be stored
      * @param color   of the node
      */
-    Node(int element, boolean color) {
+    NodeRB(int element, boolean color) {
         this(element, color, null, null);
     }
 
@@ -50,7 +52,7 @@ public class Node {
      * @param left    child of the node
      * @param right   child of the node
      */
-    Node(int element, boolean color, Node left, Node right) {
+    NodeRB(int element, boolean color, NodeRB left, NodeRB right) {
         this.color = color;
         this.element = element;
         this.left = left;

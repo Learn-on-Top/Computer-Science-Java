@@ -1,3 +1,5 @@
+package trees.binarySearchTree;
+
 /**
  * Represents a binary search tree data structure. It stores a collection of
  * elements in a hierarchical structure, where each element has a unique key
@@ -9,9 +11,11 @@
  * @version 1.0
  */
 
+import trees.EmptyTreeException;
+
 public class BinarySearchTree {
 
-    private Node root;
+    private NodeBS root;
 
     /**
      * Constructs an empty BinarySearchTree.
@@ -39,7 +43,7 @@ public class BinarySearchTree {
      * @return true if the key is found in the subtree rooted at the
      *         {@code currentNode}, false otherwise
      */
-    private boolean search(int key, Node currentNode) {
+    private boolean search(int key, NodeBS currentNode) {
         boolean answer;
 
         if (currentNode == null)
@@ -62,7 +66,7 @@ public class BinarySearchTree {
      * @param height      of the {@code currentNode}
      * @return height of the {@code BinarySearchTree}
      */
-    public int getHeight(Node currentNode, int height) {
+    public int getHeight(NodeBS currentNode, int height) {
         if (currentNode == null)
             height--;
         else {
@@ -92,9 +96,9 @@ public class BinarySearchTree {
      * @return the modified {@code currentNode} structure
      * @throws Exception if the specified element is already present in the tree
      */
-    private Node insert(int in, Node currentNode) throws Exception {
+    private NodeBS insert(int in, NodeBS currentNode) throws Exception {
         if (currentNode == null)
-            currentNode = new Node(in);
+            currentNode = new NodeBS(in);
         else if (in < currentNode.element)
             currentNode.left = insert(in, currentNode.left);
         else if (in > currentNode.element)
@@ -114,7 +118,7 @@ public class BinarySearchTree {
      */
     public void insertByParent(int in) throws Exception {
         if (root == null)
-            root = new Node(in);
+            root = new NodeBS(in);
         else if (in < root.element)
             insertByParent(in, root.left, root);
         else if (in > root.element)
@@ -132,12 +136,12 @@ public class BinarySearchTree {
      * @param parent      parent node of {@code currentNode}
      * @throws Exception if the specified element is already present in the tree
      */
-    private void insertByParent(int in, Node currentNode, Node parent) throws Exception {
+    private void insertByParent(int in, NodeBS currentNode, NodeBS parent) throws Exception {
         if (currentNode == null) {
             if (in < parent.element)
-                parent.left = new Node(in);
+                parent.left = new NodeBS(in);
             else
-                parent.right = new Node(in);
+                parent.right = new NodeBS(in);
         } else if (in < currentNode.element)
             insertByParent(in, currentNode.left, currentNode);
         else if (in > currentNode.element)
@@ -152,7 +156,7 @@ public class BinarySearchTree {
      * @param toBeRemoved the element to be removed
      * @throws Exception if the binary tree is empty
      */
-    public void remove(int toBeRemoved) throws Exception {
+    public void remove(int toBeRemoved) throws EmptyTreeException {
         root = remove(toBeRemoved, root);
     }
 
@@ -162,11 +166,11 @@ public class BinarySearchTree {
      * @param toBeRemoved the element to be removed
      * @param currentNode node being checked
      * @return updated node after removal
-     * @throws Exception if the binary tree is empty
+     * @throws EmptyTreeException if the binary tree is empty
      */
-    private Node remove(int toBeRemoved, Node currentNode) throws Exception {
+    private NodeBS remove(int toBeRemoved, NodeBS currentNode) throws EmptyTreeException {
         if (currentNode == null)
-            throw new NullPointerException("Error! The binary search tree is empty.");
+            throw new EmptyTreeException("Error! The binary search tree is empty.");
         else if (toBeRemoved < currentNode.element)
             currentNode.left = remove(toBeRemoved, currentNode.left);
         else if (toBeRemoved > currentNode.element)
@@ -187,11 +191,11 @@ public class BinarySearchTree {
      * properties.
      * 
      * @param toBeRemoved element to be removed
-     * @throws Exception if the binary tree is empty
+     * @throws EmptyTreeException if the binary tree is empty
      */
-    public void removeByParent(int toBeRemoved) throws Exception {
+    public void removeByParent(int toBeRemoved) throws EmptyTreeException {
         if (root == null)
-            throw new NullPointerException("Error! The binary search tree is empty.");
+            throw new EmptyTreeException("Error! The binary search tree is empty.");
         else if (toBeRemoved < root.element)
             removeByParent(toBeRemoved, root.left, root);
         else if (toBeRemoved > root.element)
@@ -212,11 +216,11 @@ public class BinarySearchTree {
      * @param toBeRemoved the element to be removed
      * @param currentNode node being considered
      * @param parent      parent of the current node
-     * @throws Exception if the binary tree is empty
+     * @throws EmptyTreeException if the binary tree is empty
      */
-    private void removeByParent(int toBeRemoved, Node currentNode, Node parent) throws Exception {
+    private void removeByParent(int toBeRemoved, NodeBS currentNode, NodeBS parent) throws EmptyTreeException {
         if (currentNode == null)
-            throw new NullPointerException("Error! The binary search tree is empty.");
+            throw new EmptyTreeException("Error! The binary search tree is empty.");
         else if (toBeRemoved < currentNode.element)
             removeByParent(toBeRemoved, currentNode.left, currentNode);
         else if (toBeRemoved > currentNode.element)
@@ -244,7 +248,7 @@ public class BinarySearchTree {
      * @return the updated left child after finfing and replacing the maximum
      *         element
      */
-    private Node findMaxLeft(Node currentNode, Node currentNodeLeft) {
+    private NodeBS findMaxLeft(NodeBS currentNode, NodeBS currentNodeLeft) {
         if (currentNodeLeft.right == null) {
             currentNode.element = currentNodeLeft.element;
             currentNodeLeft = currentNodeLeft.left;
@@ -260,7 +264,7 @@ public class BinarySearchTree {
      * 
      * @param currentNode node being visited
      */
-    public void preOrderTraversal(Node currentNode) {
+    public void preOrderTraversal(NodeBS currentNode) {
         if (currentNode != null) {
             System.out.println(currentNode.element + " ");
             preOrderTraversal(currentNode.left);
@@ -274,7 +278,7 @@ public class BinarySearchTree {
      * 
      * @param currentNode node being visited
      */
-    public void inOrderTraversal(Node currentNode) {
+    public void inOrderTraversal(NodeBS currentNode) {
         if (currentNode != null) {
             inOrderTraversal(currentNode.left);
             System.out.println(currentNode.element + " ");
@@ -288,7 +292,7 @@ public class BinarySearchTree {
      * 
      * @param currentNode node being visited
      */
-    public void postOrderTraversal(Node currentNode) {
+    public void postOrderTraversal(NodeBS currentNode) {
         if (currentNode != null) {
             postOrderTraversal(currentNode.left);
             postOrderTraversal(currentNode.right);

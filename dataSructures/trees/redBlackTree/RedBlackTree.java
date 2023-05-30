@@ -1,3 +1,5 @@
+package trees.redBlackTree;
+
 /**
  * The class represents a Red-Black tree, which is a self-balancing binary
  * search tree. Each node stores an element and maintains references to its left
@@ -11,7 +13,7 @@
 
 public class RedBlackTree {
 
-    private Node root;
+    private NodeRB root;
 
     /**
      * Constructs an empty {@code RedBlackTree}.
@@ -37,7 +39,7 @@ public class RedBlackTree {
      * @param currentNode node being considered
      * @return true if the key is found in the tree, false otherwise
      */
-    private boolean search(int key, Node currentNode) {
+    private boolean search(int key, NodeRB currentNode) {
         boolean answer;
 
         if (currentNode == null)
@@ -60,32 +62,32 @@ public class RedBlackTree {
      */
     public void insert(int in) throws Exception {
         if (root == null)
-            root = new Node(in);
+            root = new NodeRB(in);
         else if (root.left == null && root.right == null) {
             if (in < root.element)
-                root.left = new Node(in);
+                root.left = new NodeRB(in);
             else
-                root.right = new Node(in);
+                root.right = new NodeRB(in);
         } else if (root.left == null) {
             if (in < root.element)
-                root.left = new Node(in);
+                root.left = new NodeRB(in);
             else if (in < root.right.element) {
-                root.left = new Node(root.element);
+                root.left = new NodeRB(root.element);
                 root.element = in;
             } else {
-                root.left = new Node(root.element);
+                root.left = new NodeRB(root.element);
                 root.element = root.right.element;
                 root.right.element = in;
             }
             root.left.color = root.right.color = false;
         } else if (root.right == null) {
             if (in > root.element)
-                root.right = new Node(in);
+                root.right = new NodeRB(in);
             else if (in > root.left.element) {
-                root.right = new Node(root.element);
+                root.right = new NodeRB(root.element);
                 root.element = in;
             } else {
-                root.right = new Node(root.element);
+                root.right = new NodeRB(root.element);
                 root.element = root.left.element;
                 root.left.element = in;
             }
@@ -107,13 +109,13 @@ public class RedBlackTree {
      * @param currentNode      node being examined
      * @throws Exception if the specified element is already present in the tree
      */
-    private void insert(int in, Node greatGrandParent, Node grandParent, Node parent, Node currentNode)
+    private void insert(int in, NodeRB greatGrandParent, NodeRB grandParent, NodeRB parent, NodeRB currentNode)
             throws Exception {
         if (currentNode == null) {
             if (in < parent.element)
-                currentNode = parent.left = new Node(in, true);
+                currentNode = parent.left = new NodeRB(in, true);
             else
-                currentNode = parent.right = new Node(in, true);
+                currentNode = parent.right = new NodeRB(in, true);
 
             if (parent.color == true)
                 rebalance(greatGrandParent, grandParent, parent, currentNode);
@@ -147,7 +149,7 @@ public class RedBlackTree {
      * @param parent           node of the {@code currentNode}
      * @param currentNode      node being rebalanced
      */
-    private void rebalance(Node greatGrandParent, Node grandParent, Node parent, Node currentNode) {
+    private void rebalance(NodeRB greatGrandParent, NodeRB grandParent, NodeRB parent, NodeRB currentNode) {
         if (parent.color == true) {
             if (parent.element > grandParent.element) {
                 if (currentNode.element > parent.element)
@@ -179,9 +181,9 @@ public class RedBlackTree {
      * @param node to be rotated
      * @return the new root of the rotated subtree
      */
-    private Node leftRotation(Node node) {
-        Node nodeRight = node.right;
-        Node nodeRightLeft = nodeRight.left;
+    private NodeRB leftRotation(NodeRB node) {
+        NodeRB nodeRight = node.right;
+        NodeRB nodeRightLeft = nodeRight.left;
 
         nodeRight.left = node;
         node.right = nodeRightLeft;
@@ -195,9 +197,9 @@ public class RedBlackTree {
      * @param node to be rotated
      * @return the new root of the rotated subtree
      */
-    private Node rightRotation(Node node) {
-        Node nodeLeft = node.left;
-        Node nodeLeftRight = nodeLeft.right;
+    private NodeRB rightRotation(NodeRB node) {
+        NodeRB nodeLeft = node.left;
+        NodeRB nodeLeftRight = nodeLeft.right;
 
         nodeLeft.right = node;
         node.left = nodeLeftRight;
@@ -212,7 +214,7 @@ public class RedBlackTree {
      * @param node to be rotated
      * @return the new root of the rotated subtree
      */
-    private Node leftRightRotation(Node node) {
+    private NodeRB leftRightRotation(NodeRB node) {
         node.right = rightRotation(node.right);
 
         return leftRotation(node);
@@ -225,7 +227,7 @@ public class RedBlackTree {
      * @param node to be rotated
      * @return the new root of the rotated subtree
      */
-    private Node rightLeftRotation(Node node) {
+    private NodeRB rightLeftRotation(NodeRB node) {
         node.left = leftRotation(node.left);
 
         return rightRotation(node);
@@ -246,7 +248,7 @@ public class RedBlackTree {
      * @param currentNode node being visited
      * @implNote (r) represents a red node and (b) represents a black node
      */
-    private void preOrderTraversal(Node currentNode) {
+    private void preOrderTraversal(NodeRB currentNode) {
         if (currentNode != null) {
             System.out.println(currentNode.element + (currentNode.color ? " -> (r) " : " -> (b) "));
             preOrderTraversal(currentNode.left);
@@ -269,7 +271,7 @@ public class RedBlackTree {
      * @param currentNode node being visited
      * @implNote (r) represents a red node and (b) represents a black node
      */
-    private void inOrderTraversal(Node currentNode) {
+    private void inOrderTraversal(NodeRB currentNode) {
         if (currentNode != null) {
             inOrderTraversal(currentNode.left);
             System.out.println(currentNode.element + (currentNode.color ? " -> (r) " : " -> (b) "));
@@ -292,7 +294,7 @@ public class RedBlackTree {
      * @param currentNode node being visited
      * @implNote (r) represents a red node and (b) represents a black node
      */
-    private void postOrderTraversal(Node currentNode) {
+    private void postOrderTraversal(NodeRB currentNode) {
         if (currentNode != null) {
             postOrderTraversal(currentNode.left);
             postOrderTraversal(currentNode.right);
