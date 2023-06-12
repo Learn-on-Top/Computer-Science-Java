@@ -258,18 +258,26 @@ public class BinarySearchTree {
         return currentNodeLeft;
     }
 
+    public void preOrderTraversal() {
+        preOrderTraversal(root);
+    }
+
     /**
      * Performs a preorder traversal of the {@code BinarySearchTree}, visting the
      * {@code currentNode}, followed by its left subtree and then its right subtree.
      * 
      * @param currentNode node being visited
      */
-    public void preOrderTraversal(NodeBS currentNode) {
+    private void preOrderTraversal(NodeBS currentNode) {
         if (currentNode != null) {
-            System.out.println(currentNode.element + " ");
+            System.out.print(currentNode.element + " ");
             preOrderTraversal(currentNode.left);
             preOrderTraversal(currentNode.right);
         }
+    }
+
+    public void inOrderTraversal() {
+        inOrderTraversal(root);
     }
 
     /**
@@ -278,12 +286,16 @@ public class BinarySearchTree {
      * 
      * @param currentNode node being visited
      */
-    public void inOrderTraversal(NodeBS currentNode) {
+    private void inOrderTraversal(NodeBS currentNode) {
         if (currentNode != null) {
             inOrderTraversal(currentNode.left);
-            System.out.println(currentNode.element + " ");
+            System.out.print(currentNode.element + " ");
             inOrderTraversal(currentNode.right);
         }
+    }
+
+    public void postOrderTraversal() {
+        postOrderTraversal(root);
     }
 
     /**
@@ -292,11 +304,11 @@ public class BinarySearchTree {
      * 
      * @param currentNode node being visited
      */
-    public void postOrderTraversal(NodeBS currentNode) {
+    private void postOrderTraversal(NodeBS currentNode) {
         if (currentNode != null) {
             postOrderTraversal(currentNode.left);
             postOrderTraversal(currentNode.right);
-            System.out.println(currentNode.element + " ");
+            System.out.print(currentNode.element + " ");
         }
     }
 

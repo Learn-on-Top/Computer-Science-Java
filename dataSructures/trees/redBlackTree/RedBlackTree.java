@@ -45,7 +45,7 @@ public class RedBlackTree {
         if (currentNode == null)
             answer = false;
         else if (key == currentNode.element)
-            answer = false;
+            answer = true;
         else if (key < currentNode.element)
             answer = search(key, currentNode.left);
         else
@@ -121,11 +121,11 @@ public class RedBlackTree {
                 rebalance(greatGrandParent, grandParent, parent, currentNode);
         } else {
             if (currentNode.left != null && currentNode.right != null && currentNode.left.color == true
-                    && currentNode.right.color == true) {
+                    && currentNode.right.color == true) { // frag
                 currentNode.color = true;
                 currentNode.left.color = currentNode.right.color = false;
 
-                if (currentNode == root)
+                if (currentNode == root) // root can't be colored
                     currentNode.color = false;
                 else if (parent.color == true)
                     rebalance(greatGrandParent, grandParent, parent, currentNode);
